@@ -1,13 +1,25 @@
-pwd = input("Please enter your password: ")
+master_pwd = input("Please enter the master password: ")
 
 def view():
-    pass
+    with open("passwords.txt", "r") as file:
+        for line in file.readlines():
+            data = line.rstrip()
+            # split string between account name and password
+            user, passw = data.split("|")
+            print(f"Account Name: {user} | Password: {passw}")
 
 def add():
+    name = input("\nAccount Name: ")
+    pwd = input("Password: ")
+
+    # auto closes file
+    with open("passwords.txt", "a") as file:
+        file.write(f"{name} | {pwd}\n")
+
 
 
 while True:
-    mode = input("Would you like to add a new password, or view existing ones? (add, view), press q to quit: ").lower()
+    mode = input("\nWould you like to add a new password, or view existing ones? (add, view), press q to quit: ").lower()
     if mode == "q":
         break
 
